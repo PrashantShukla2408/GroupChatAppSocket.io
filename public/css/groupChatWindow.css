@@ -1,0 +1,123 @@
+body {
+    background-color: #121212;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #00cc66;
+    margin-bottom: 10px;
+}
+
+#adminContainer, #groupUsersContainer {
+    background: #1e1e1e;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+#groupChatWindow {
+    background: #1e1e1e;
+    width: 100%;
+    max-width: 500px;
+    height: 300px;
+    overflow-y: auto;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.1);
+    margin-bottom: 15px;
+}
+
+#groupMessageSend {
+    display: flex;
+    width: 100%;
+    max-width: 500px;
+    align-items: center;
+    gap: 10px;
+}
+
+#groupMessageInput {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background: #2a2a2a;
+    color: white;
+    transition: border-color 0.3s ease;
+}
+
+#groupMessageInput:focus {
+    border-color: #00cc66;
+    outline: none;
+}
+
+#sendGroupMessageButton {
+    background: #00cc66;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+#sendGroupMessageButton:hover {
+    background: #00994d;
+    box-shadow: 0px 4px 10px rgba(0, 204, 102, 0.4);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    #groupChatWindow {
+        height: 250px;
+        padding: 10px;
+    }
+
+    #groupMessageSend {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    #groupMessageInput {
+        font-size: 14px;
+    }
+
+    #sendGroupMessageButton {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

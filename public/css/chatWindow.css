@@ -1,0 +1,138 @@
+
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+#userContainer {
+    width: 100%;
+    max-width: 400px;
+    background: #2e2d2d; 
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+    overflow-y: auto;
+    max-height: 200px;
+    color: #28a745; 
+}
+
+
+#chatWithContainer {
+    width: 100%;
+    max-width: 400px;
+    background: #343a40;
+    color: #28a745; 
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+#messageContainer {
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    background: #2e2d2d; 
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: white;
+}
+
+/* Message Styles */
+.message {
+    padding: 8px 12px;
+    border-radius: 8px;
+    max-width: 75%;
+    word-wrap: break-word;
+}
+
+.sent {
+    background-color: #28a745; /* Green */
+    color: white;
+    align-self: flex-end;
+}
+
+.received {
+    background-color: #007bff; /* Blue */
+    color: white;
+    align-self: flex-start;
+}
+
+/* Message Status */
+#messageStatus {
+    text-align: center;
+    font-size: 14px;
+    color: lightgray;
+    margin-top: 5px;
+}
+
+/* Input and Send Button */
+#sendDiv {
+    display: flex;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+#message {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #28a745; /* Green border */
+    border-radius: 8px;
+    font-size: 16px;
+    background: #343a40; /* Dark input */
+    color: white;
+}
+
+#sendButton {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#sendButton:hover {
+    background-color: #0056b3;
+}
+
+
+#createGroupButton {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#createGroupButton:hover {
+    background-color: #218838;
+}
+
+
+@media (max-width: 480px) {
+    #userContainer, #chatWithContainer, #messageContainer, #sendDiv {
+        max-width: 100%;
+    }
+}
