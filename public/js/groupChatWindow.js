@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     "sendGroupMessageButton"
   );
   const adminContainer = document.getElementById("adminContainer");
+  const groupMediaUploadButton = document.getElementById(
+    "groupMediaUploadButton"
+  );
 
   const backendURL = "http://localhost:5500";
   const socket = io(backendURL);
@@ -127,12 +130,47 @@ document.addEventListener("DOMContentLoaded", async () => {
     groupMessageInput.value = "";
   });
 
-  socket.on("receiveGroupMessage", (groupMessage) => {
-    displayGroupMessage(groupMessage);
-  });
-
   window.addEventListener("beforeunload", () => {
     socket.disconnect();
+  });
+
+  groupMediaUploadButton.addEventListener("click", async () => {
+    const groupMediaFile = document.getElementById("groupMediaFile").files[0];
+    console.log(groupMediaFile);
+
+    const formData = new FormData();
+    formData.append("file", groupMediaFile);
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `${backendURL}/groups/uploadGroupMediaFile`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const fileURL = response.data.fileUrl;
+
+      const newGroupMessage = {
+        sender: { name: "You" },
+        senderId: userId,
+        groupId: groupId,
+        message: `File uploaded: <a href="${fileURL}" target="_blank">${groupMediaFile.name}</a>`,
+      };
+      socket.emit("sendGroupMessage", newGroupMessage);
+      displayGroupMessage(newGroupMessage);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  socket.on("receiveGroupMessage", (groupMessage) => {
+    displayGroupMessage(groupMessage);
   });
 
   function enableAdminPowers() {

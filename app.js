@@ -2,6 +2,7 @@ require("dotenv").config();
 const path = require("path");
 
 const express = require("express");
+const fileUpload = require("express-fileupload");
 const http = require("http");
 const { Server } = require("socket.io");
 const bodyParser = require("body-parser");
@@ -34,6 +35,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "public", "views")));
+app.use(fileUpload());
 app.use("/users", userRoutes);
 app.use(messageRoutes);
 app.use("/groups", groupRoutes);

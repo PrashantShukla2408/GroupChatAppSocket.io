@@ -1,4 +1,5 @@
 const path = require("path");
+const AWS = require("aws-sdk");
 
 const sequelize = require("../util/database");
 const { Op } = require("sequelize");
@@ -7,6 +8,14 @@ const User = require("../models/userModel");
 const Group = require("../models/groupModel");
 const GroupUser = require("../models/groupUserModel");
 const GroupMessage = require("../models/groupMessageModel");
+
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+});
+
+const s3 = new AWS.S3();
 
 exports.createGroup = async (req, res) => {
   try {
@@ -305,5 +314,27 @@ exports.deleteGroup = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Error deleting group" });
+  }
+};
+
+exports.uploadGroupMediaFile = async (req, res) => {
+  try {
+    if (!req.files || !req.files.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+
+    const file = req.files.file;
+    const params = {
+      Bucket: process.env.S3_BUCKET_NAME,
+      Key: `${Date.now().toString()}-${file.name}`,
+      Body: file.data,
+      ACL: "public-read",
+    };
+
+    const data = await s3.upload(params).promise();
+    res.status(200).json({ fileUrl: data.Location });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error uploading file" });
   }
 };

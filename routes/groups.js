@@ -5,6 +5,7 @@ const express = require("express");
 const groupControllers = require("../controllers/groupControllers");
 
 const auth = require("../middlewares/auth");
+const { group } = require("console");
 
 const router = express();
 
@@ -22,5 +23,10 @@ router.put(
   groupControllers.changeGroupAdmin
 );
 router.delete("/deleteGroup/:groupId", auth, groupControllers.deleteGroup);
+router.post(
+  "/uploadGroupMediaFile",
+  auth,
+  groupControllers.uploadGroupMediaFile
+);
 
 module.exports = router;
